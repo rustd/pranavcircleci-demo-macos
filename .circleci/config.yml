@@ -5,15 +5,17 @@ jobs: # a basic unit of work in a run
     macos:
       xcode: 11.3.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
-      - checkout  # pull down code from your version control system.
+      - checkout # pull down code from your version control system.
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
+    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
 
-  build: 
+  build:
     macos:
       xcode: 11.3.0 # indicate our selected version of Xcode
-    steps: 
+    steps:
       - checkout
       - run:
           # build our application
@@ -26,7 +28,7 @@ jobs: # a basic unit of work in a run
       - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
           path: app.zip
           destination: app
-          
+
 workflows:
   version: 2
   test_build:
